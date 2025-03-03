@@ -35,4 +35,5 @@ Autenticacion.verificarToken = async (req, res, next) => {
   }
 
 
+
   module.exports = Autenticacion;

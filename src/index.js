@@ -1,5 +1,6 @@
 const app = require('./server.js');
 require('./db.js');
+require('./auth.js')
 
 // Sirve para ver en consola información útil sobre cómo es llamado el servidor
 const morgan = require('morgan');

@@ -23,8 +23,10 @@ npm i connect-flash  // CONNECT-FLASH brinda herramientas para intercambiar info
 
 npm i bcryptjs  // BCRYPTJS tiene herramientas de encriptado de información
 
-npm i express-session // Para impplementar el guardado de sesión de un usuario
 
-npm i passport // Tiene herramientas para autenticar usuario
-npm i passport-local
 
+// AUTENTICACION DE GOOGLE
+npm i passport
+npm i passport-google-oauth2
+npm i express-session
+npm i mongoose-findorcreate

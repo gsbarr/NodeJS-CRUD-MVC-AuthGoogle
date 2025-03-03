@@ -1,5 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+const passport = require('passport');
+const session = require('express-session');
+
 
 // Inicializaciones
 const app = express();
@@ -20,8 +23,47 @@ app.use(require('./routes/MotosRutas.js'));
 app.use(require('./routes/NoticiasRutas.js'));
 app.use(require('./routes/UsuariosRutas.js'));
 
+
 // Archivos estáticos
 app.use(express.static(__dirname +  '\public')); // Configuramos cuál es la carpeta PUBLIC
 
+// Ruta para inicio / creacion de usuario
+app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Chequea si esta logueado
+function estaLogueado(req, res, next) {
+    
+    if(req.user && req.user.length > 0){
+        console.log('LOGUEA');
+        next();
+    }
+    else {
+        console.log('NO LOGUEA');
+        res.sendStatus(401);
+    }
+  }
+
+
+app.get('/auth/google', 
+    passport.authenticate('google', { scope: ['email', 'profile']})
+);
+
+app.get( '/auth/google/callback',
+    passport.authenticate( 'google', {
+        successRedirect: '/auth/google/success',
+        failureRedirect: '/auth/google/failure'
+}));
+
+app.get('/auth/google/success', estaLogueado, (req, res) => {
+    console.log(req.user);
+    res.send(`Hello ${req.user[0].googleEmail}`);
+  });
+
+app.get('/auth/google/failure', (req, res) => {
+    res.send('Failed to authenticate..');
+  });
+  
 
 module.exports = app;
