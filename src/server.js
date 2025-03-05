@@ -13,10 +13,14 @@ app.set('views', __dirname + '../views');
 
 // Middleware
 app.use(express.urlencoded({extended: false})); // Convierte automaticamente cualquier dato que recibe en un JSON
-app.use(cors());
+app.use(cors({credentials: true}));
  
+// CREAMOS session para autenticacion --> MUY IMPORTANTE EL ORDEN DEL CODIGO
+app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
  
-//Variables globales
 
 // Rutas
 app.use(require('./routes/MotosRutas.js'));
@@ -24,13 +28,12 @@ app.use(require('./routes/NoticiasRutas.js'));
 app.use(require('./routes/UsuariosRutas.js'));
 
 
-// Archivos estáticos
-app.use(express.static(__dirname +  '\public')); // Configuramos cuál es la carpeta PUBLIC
+// Archivos estáticos (FRONT END)
+app.use(express.static(__dirname +  "\\public")); // Configuramos cuál es la carpeta PUBLIC
 
+
+////////////////////////////////////////////////////////////////
 // Ruta para inicio / creacion de usuario
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Chequea si esta logueado
 function estaLogueado(req, res, next) {
@@ -41,6 +44,7 @@ function estaLogueado(req, res, next) {
     }
     else {
         console.log('NO LOGUEA');
+        console.log(req.user);
         res.sendStatus(401);
     }
   }
@@ -61,8 +65,22 @@ app.get('/auth/google/success', estaLogueado, (req, res) => {
     res.send(`Hello ${req.user[0].googleEmail}`);
   });
 
+  app.get('/carlitos', estaLogueado, (req, res) => {
+    console.log(req.user);
+    res.send(`Hello ${req.user[0].googleEmail}`);
+  });
+
 app.get('/auth/google/failure', (req, res) => {
     res.send('Failed to authenticate..');
+  });
+
+  app.get('/logout', async (req, res) => {
+    req.logout(req.user, err => {
+      if(err) return next(err);
+      req.session.destroy();
+      //res.redirect("/");
+    });
+
   });
   
 
