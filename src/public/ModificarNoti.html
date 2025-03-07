@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar noticias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilo_noticias.css">
+</head>
+<body>
+    
+<div class="container">
+    <h1>Modificación de noticias
+      <div class="right"><a class="waves-effect waves-light btn-large" href="index.html"><i class="material-icons left">arrow_back</i>Volver</a></div>
+    </h1>
+    <h4>Consultar por ID o por titulo</h4>
+
+    <div class="row">
+        <form class="col s12 formu_creacion">
+          <div class="row">
+            <div class="input-field col s10">
+              <input placeholder="ID" id="idNoticia" type="text" class="validate">
+              <label for="id">ID</label>
+            </div>
+            <div class="input-field col s2">
+              <a class="waves-effect waves-light btn" onclick="buscarNoticiaPorID()"><i class="material-icons left">search</i>Buscar</a>
+            </div>
+          </div>
+            <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="Autor" id="autorNoticia" type="text" class="validate">
+                  <label for="autor">Autor</label>
+                </div>
+              </div>
+          <div class="row">
+            <div class="input-field col s10">
+              <input placeholder="Título" id="tituloNoticia" type="text" class="validate">
+              <label for="titulo">Título</label>
+            </div>
+            <div class="input-field col s2">
+              <a class="waves-effect waves-light btn" onclick="buscarNoticiaPorTitulo()"><i class="material-icons left">search</i>Buscar</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+                <textarea id="textoNoticia" class="materialize-textarea"></textarea>
+                <label for="texto">Texto</label>
+              </div>
+          </div>
+          
+          <div class="input-field">
+            <a class="waves-effect waves-light btn" onclick="modificarNoticia()"><i class="material-icons left">cloud_upload</i>Guardar cambios</a>
+          
+          </div>
+          <br>
+        </form>
+      </div>
+
+</div>
+
+    <script src="js/Noticias.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+</html>

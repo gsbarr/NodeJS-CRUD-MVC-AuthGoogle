@@ -23,9 +23,7 @@ app.use(passport.session());
  
 
 // Rutas
-app.use(require('./routes/MotosRutas.js'));
 app.use(require('./routes/NoticiasRutas.js'));
-app.use(require('./routes/UsuariosRutas.js'));
 
 
 // Archivos estáticos (FRONT END)
@@ -62,23 +60,21 @@ app.get( '/auth/google/callback',
 
 app.get('/auth/google/success', estaLogueado, (req, res) => {
     console.log(req.user);
-    res.send(`Hello ${req.user[0].googleEmail}`);
+    res.send(`Hello ${req.user[0].googleEmail}
+      <a href="/"> Volver al inicio </a>`);
   });
 
-  app.get('/carlitos', estaLogueado, (req, res) => {
-    console.log(req.user);
-    res.send(`Hello ${req.user[0].googleEmail}`);
-  });
+
 
 app.get('/auth/google/failure', (req, res) => {
     res.send('Failed to authenticate..');
   });
 
-  app.get('/logout', async (req, res) => {
+  app.get('/auth/logout', (req, res) => {
     req.logout(req.user, err => {
       if(err) return next(err);
       req.session.destroy();
-      //res.redirect("/");
+      res.redirect("/");
     });
 
   });

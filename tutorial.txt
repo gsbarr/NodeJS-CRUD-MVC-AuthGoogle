@@ -18,15 +18,11 @@ npm i nodemon  // NODEMON reinicia automáticamente el servidor cuando le hacemo
 
 npm i mongoose  // Para conectar a la base de datos MONGODB
 
-/// Otros módulos
-npm i connect-flash  // CONNECT-FLASH brinda herramientas para intercambiar información en cookies
-
-npm i bcryptjs  // BCRYPTJS tiene herramientas de encriptado de información
-
 
 
 // AUTENTICACION DE GOOGLE
 npm i passport
 npm i passport-google-oauth2
+npm i connect-ensure-login // Para verificar si esta logueado
 npm i express-session
-npm i mongoose-findorcreate
+npm i mongoose-findorcreate // Para tener la funcion findorcreate
