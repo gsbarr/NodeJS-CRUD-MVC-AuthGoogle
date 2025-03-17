@@ -20,7 +20,6 @@ app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
- 
 
 // Rutas
 app.use(require('./routes/NoticiasRutas.js'));
